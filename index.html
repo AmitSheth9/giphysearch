@@ -15,26 +15,29 @@
     <img id='gifimage'>
 
     <script>
-        console.log('test');
         const resultImage = document.getElementById('gifimage');
         const button = document.getElementById('subbutton');
         const userInput = document.getElementById('user-query');
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
+        
+        button.addEventListener('click', fetchImage);
+
+        
+        function fetchImage (e) {
+        e.preventDefault();
         console.log(userInput.value);
+        
         fetch(`https://api.giphy.com/v1/gifs/translate?api_key=7SYz1oZoQUXQfyvGCmAvDFM0oOUvaATh&s=${userInput.value}`, {mode: 'cors'})
         .then(function(response) {
-
-        return response.json();
-    })
-    .then(function(response) {   console.log(response);
-        resultImage.src = response.data.images.original.url;
-    });
-        
+            return response.json();
+        })
+        .then(function(response) {   
+            console.log(response);
+            resultImage.src = response.data.images.original.url;
+        })
+        .catch(function(err) {
+            console.error(err);
         });
-
-        
-       
+       }
  
     </script>
 </body>
