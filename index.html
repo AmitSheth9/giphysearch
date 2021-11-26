@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" >
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type ='text' id='user-query' name = 'user' value = ''>
+        <button type ='submit' id = 'subbutton'>Submit</button>
+    </form>
+    <img id='gifimage'>
+
+    <script>
+        console.log('test');
+        const resultImage = document.getElementById('gifimage');
+        const button = document.getElementById('subbutton');
+        const userInput = document.getElementById('user-query');
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+        console.log(userInput.value);
+        fetch(`https://api.giphy.com/v1/gifs/translate?api_key=7SYz1oZoQUXQfyvGCmAvDFM0oOUvaATh&s=${userInput.value}`, {mode: 'cors'})
+        .then(function(response) {
+
+        return response.json();
+    })
+    .then(function(response) {   console.log(response);
+        resultImage.src = response.data.images.original.url;
+    });
+        
+        });
+
+        
+       
+ 
+    </script>
+</body>
+</html>
